@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_4.xsd"
+version="2.4">
+	<tlib-version>0.1</tlib-version>
+	<short-name>webTagTools</short-name>
+	<tag>
+		<name>webPath</name>
+		<tag-class>com.jen.sen.web.tag.WebPathTag</tag-class>
+		<attribute>
+			<name>pathAddress</name>
+			<required>true</required>
+		</attribute>
+		<body-content>JSP</body-content>
+	</tag>	
+</taglib>

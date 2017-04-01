@@ -1,0 +1,14 @@
+@import url("select2.min.css");
+
+input.error { border: 1px solid red; }
+label.error {
+  background:url("../images/icon/unchecked.gif") no-repeat 0px 0px;
+  background-position-y:3px;
+  padding-left: 16px;
+  padding-bottom: 2px;
+  font-weight: bold;
+  color: #EA5200;
+}
+label.checked {
+  background:url("../images/icon/checked.gif") no-repeat 0px 0px;
+}

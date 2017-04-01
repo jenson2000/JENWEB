@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error">
+	<Appenders>
+
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %M-%L- %msg%n" />
+		</Console>
+		<RollingFile name="JENERRFile" fileName="logs/JEN.log"
+			filepattern="${catalina.home}/logs/JEN-%d{yyyy-MM-dd-HH}.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+			 <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy fileIndex="max" max="10" />
+		</RollingFile>
+
+	</Appenders>
+
+	<Loggers>
+	
+		<Logger name="com.jen.sen" level="info" additivity="true">
+			<appender-ref ref="JENERRFile" />
+		</Logger>
+	
+		<Root level="Warn">
+			<appender-ref ref="Console" />
+		</Root>		
+
+	</Loggers>
+</Configuration>

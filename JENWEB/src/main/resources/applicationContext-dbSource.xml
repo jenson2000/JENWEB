@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                         http://www.springframework.org/schema/context
+                         http://www.springframework.org/schema/context/spring-context-4.2.xsd
+                         http://www.springframework.org/schema/tx
+                         http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+                         http://www.springframework.org/schema/aop
+                         http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+                         http://www.springframework.org/schema/mvc
+                         http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd 
+                         http://www.springframework.org/schema/cache 
+                         http://www.springframework.org/schema/cache/spring-cache-4.2.xsd ">
+
+	<context:component-scan base-package="com.jen.sen.persistence" />
+
+
+	<!-- DataSource -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/sendb?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull" />
+		<property name="user" value="root" />
+		 <property name="password" value="1234" />
+		<!-- <property name="password" value="jenson1234com" />    -->
+		<!-- 初始化时的连接数 default:3 -->
+		<property name="initialPoolSize" value="5" />
+		<!-- 当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException,如设为0则无限期等待。单位毫秒。Default: 
+			0 -->
+		<property name="checkoutTimeout" value="3000" />
+		<!-- 连接池中保留的最小的连接数 -->
+		<property name="minPoolSize" value="5" />
+		<!-- 连接池中保留的最大的连接数 default:15 -->
+		<property name="maxPoolSize" value="2000" />
+		<!-- 连接池中连接耗尽时,c3p0一次同时获取的连接数. default:3 -->
+		<property name="acquireIncrement" value="5" />		
+		<!-- 最大空闲时间,XX秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+		<property name="maxIdleTime" value="60" />
+		<property name="automaticTestTable" value="C3P0TestTable" />
+		<!-- 每XX秒检查所有连接池中的空闲连接。Default: 0 ,
+		c3p0反空闲设置，防止8小时失效问题28800-->
+		<property name="idleConnectionTestPeriod" value="18000" />
+		<property name="testConnectionOnCheckout" value="false" />
+		<property name="testConnectionOnCheckin" value="true" />
+	</bean>
+
+	<!-- SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />	
+		 <property name="packagesToScan" value="com.jen.sen.persistence" />	
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+				<!-- 加载缓存所需配置文件,使用ehcache缓存组件
+				 可以缓存findall()、list()、Iterator()、createCriteria()、createQuery()等 ,否则只是用load()才缓存
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				   
+                <prop key="hibernate.net.sf.ehcache.configurationResourceName">classpath:ehcache.xml</prop>  
+				 -->
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+				<prop key="javax.persistence.validation.mode">none</prop>
+				
+			</props>
+		</property>
+	</bean>
+
+	<!-- XML Configuration TransactionManagent -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*"  propagation="REQUIRED" read-only="true" />
+			<tx:method name="query*"  propagation="REQUIRED" read-only="true" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="cache*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="check*" read-only="true" />
+			<tx:method name="load*" read-only="true" />
+			<tx:method name="audit*" propagation="REQUIRED" />
+			<tx:method name="taskProcess*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(public * com.jen.sen.service..*.*(..))"
+			id="servicePoinitcut" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePoinitcut" />
+	</aop:config>
+
+
+</beans>
