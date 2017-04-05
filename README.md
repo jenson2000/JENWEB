@@ -52,4 +52,5 @@ it has five project
 
 Getting Started
 ---
-/jenweb/doc/sendb.sql is sql scripts, you can use it to create database.
+/jenweb/doc/sendb.sql is sql scripts, you can use it to create database.<br>
+
