@@ -1,3 +1,9 @@
+/*=======================建库、用户脚本=======================================*/
+CREATE DATABASE sendb DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+grant all privileges on sendb.* to jensen @'%' identified by 'jenson180#jenson' with grant option;
+
+FLUSH   PRIVILEGES;
 -- ----------------------------
 -- Table structure for t_right
 -- ----------------------------
