@@ -33,3 +33,19 @@ build and running
 </tr>
 </table>
 <br>
+
+File Hierarchy of the Source Code Package
+---
+JENWEN used maven to manage third-party components.
+it has five project
+ > JEN-STATIC <br>
+ >> JEN-PARENT
+ >>> JEN-COMMON <br>
+ >>> JEN-DAO <br>
+ >>> JENWEB <br>
+ 
+ 1. JEN-STATIC is a static project. it includes static recourses, such as css,images,js,etc.
+ 2. JEN-PARENT is maven parent project.
+ 3. JEN-COMMON is tools package project.include some constant bean,tools bean,etc.
+ 4. JEN-DAO is DAO project. include pojo,DAO etc. depends on JEN-COMMON
+ 5. JENWEB is web project,depends on JEN-DAO,JEN-COMMON
