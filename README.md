@@ -1,3 +1,4 @@
 JENWEB
 ===
-j2ee project
+J2EE project framework
+---
