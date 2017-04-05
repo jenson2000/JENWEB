@@ -32,7 +32,6 @@ build and running
 <td>3.2.X</td>
 </tr>
 </table>
-<br>
 
 example
 ---  
