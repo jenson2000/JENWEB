@@ -1,7 +1,7 @@
 JENWEB
 ===
 
-JENWEB is a J2EE project framework,it used spring MVC,hibernate,shiro,redis etc. it develop on jdk1.8,tomcat8,maven. you can use it for free.
+JENWEB is a ***J2EE*** project framework,it used ***spring MVC,hibernate,shiro,redis*** etc. it develop on ***jdk1.8,tomcat8***,maven. you can use it for free.
 
 build and running
 ---
@@ -49,3 +49,7 @@ it has five project
  3. JEN-COMMON is tools package project.include some constant bean,tools bean,etc.
  4. JEN-DAO is DAO project. include pojo,DAO etc. depends on JEN-COMMON
  5. JENWEB is web project,depends on JEN-DAO,JEN-COMMON
+
+Getting Started
+---
+/jenweb/doc/sendb.sql is sql scripts, you can use it to create database.
