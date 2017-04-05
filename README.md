@@ -3,8 +3,9 @@ JENWEB
 
 JENWEB is a J2EE project framework,it used spring MVC,hibernate,shiro,redis etc. it develop on jdk1.8,tomcat8. you can use it for free.
 
-Requirements
+build and running
 ---
+<br>
 <table>
 <tr>
 <td></td>
@@ -23,7 +24,12 @@ Requirements
 <td>1.3.2</td>
 </tr>
 <tr>
+<td>mysql</td>
+<td>5.8</td>
+</tr>
+<tr>
 <td>redis</td>
-<td>.3.2.X</td>
+<td>3.2.X</td>
 </tr>
 </table>
+<br>
