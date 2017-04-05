@@ -25,7 +25,7 @@ build and running
 </tr>
 <tr>
 <td>mysql</td>
-<td>5.8</td>
+<td>5.7</td>
 </tr>
 <tr>
 <td>redis</td>
