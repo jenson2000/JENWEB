@@ -1,7 +1,7 @@
 JENWEB
 ===
 
-JENWEB is a J2EE project framework,it used spring MVC,hibernate,shiro,redis etc. it develop on jdk1.8,tomcat8. you can use it for free.
+JENWEB is a J2EE project framework,it used spring MVC,hibernate,shiro,redis etc. it develop on jdk1.8,tomcat8,maven. you can use it for free.
 
 build and running
 ---
